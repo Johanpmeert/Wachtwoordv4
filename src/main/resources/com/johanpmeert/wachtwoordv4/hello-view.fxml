@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="210.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.johanpmeert.wachtwoordv4.HelloController">
+    <children>
+        <ChoiceBox fx:id="passwordBuildup" layoutX="223.0" layoutY="25.0" onAction="#calculateEntropyScore" prefHeight="25.0" prefWidth="255.0" />
+        <ChoiceBox fx:id="passwordLength" layoutX="74.0" layoutY="25.0" onAction="#calculateEntropyScore" prefHeight="25.0" prefWidth="61.0" />
+        <Button layoutX="25.0" layoutY="121.0" onAction="#onGenerateButtonClick" prefHeight="25.0" prefWidth="361.0" text="Generate password" />
+        <Label layoutX="24.0" layoutY="73.0" text="Password score:" />
+        <Label layoutX="24.0" layoutY="29.0" text="Length:" />
+        <Label layoutX="166.0" layoutY="29.0" text="Content:" />
+        <Button layoutX="424.0" layoutY="121.0" onAction="#onQuitButtonClick" text="Quit" />
+        <Label fx:id="entropyScore" layoutX="115.0" layoutY="73.0" prefHeight="17.0" prefWidth="264.0" text="Label" />
+      <ChoiceBox fx:id="specials" layoutX="439.0" layoutY="60.0" prefHeight="25.0" prefWidth="39.0" />
+      <Label layoutX="344.0" layoutY="64.0" prefHeight="17.0" prefWidth="84.0" text="No of specials:" />
+      <TextFlow fx:id="gpTextFlow" layoutX="26.0" layoutY="166.0" prefHeight="25.0" prefWidth="442.0" />
+    </children>
+</AnchorPane>
