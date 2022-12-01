@@ -45,13 +45,16 @@ public class HelloController {
     private ChoiceBox<Integer> specials;
 
     @FXML
-    private TextFlow gpTextFlow;
+    private TextFlow gpTextFlow; // this supports showing text in color to improve password readability
 
     @FXML
     protected void onGenerateButtonClick() {
+        // generate new password
         String password = createPassword(POSSIBILITIES.valueOf(passwordBuildup.getValue()), passwordLength.getValue(), specials.getValue());
-        gpTextFlow.getChildren().clear();
+        // show password
+        gpTextFlow.getChildren().clear(); // delete previous password
         convertToColors(gpTextFlow, password);
+        // copy password to clipboard
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent content = new ClipboardContent();
         content.putString(password);
@@ -102,12 +105,12 @@ public class HelloController {
             StringBuilder password = new StringBuilder();
             // create password
             for (int counter = 0; counter < length; counter++) {
-                password.append(content.charAt(sr.nextInt(content.length() - 1)));
+                password.append(content.charAt(sr.nextInt(content.length())));
             }
             // mix in the special characters if needed
             if (pos.equals(POSSIBILITIES.LETTERS_DIGITS_SPECIALS)) {
                 for (int counter = 0; counter < maxSpecials; counter++) {
-                    password.setCharAt(sr.nextInt(length),BUILDUP.SPECIAL.content.charAt(sr.nextInt(BUILDUP.SPECIAL.content.length()-1)));
+                    password.setCharAt(sr.nextInt(length), BUILDUP.SPECIAL.content.charAt(sr.nextInt(BUILDUP.SPECIAL.content.length() - 1)));
                 }
             }
             generatedPassword = password.toString();
@@ -120,10 +123,13 @@ public class HelloController {
         return generatedPassword;
     }
 
-    void convertToColors(TextFlow txtFlow, String text){
-        for (int counter=0;counter<text.length();counter++){
+    void convertToColors(TextFlow txtFlow, String text) {
+        // letters in BLACK
+        // digits in RED
+        // specials in BLUE
+        for (int counter = 0; counter < text.length(); counter++) {
             Text txt = new Text(String.valueOf(text.charAt(counter)));
-            txt.setFont(Font.font("Monospace",13));
+            txt.setFont(Font.font("Monospace", 13));
             if (Character.isDigit(text.charAt(counter))) {
                 txt.setFill(Color.RED);
             } else if (Character.isLetter(text.charAt(counter))) {
