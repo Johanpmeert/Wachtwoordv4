@@ -54,8 +54,6 @@ public class HelloController {
         String password = createPassword(POSSIBILITIES.valueOf(passwordBuildup.getValue()), passwordLength.getValue(), specials.getValue());
         // show password
         gpTextFlow.getChildren().clear(); // delete previous password
-        gpTextFlow.getChildren().add(new Text(" ".repeat(50))); // delete screen artifacts
-        gpTextFlow.getChildren().clear();
         convertToColors(gpTextFlow, password);
         // copy password to clipboard
         final Clipboard clipboard = Clipboard.getSystemClipboard();
