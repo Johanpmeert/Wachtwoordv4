@@ -7,6 +7,7 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -53,6 +54,8 @@ public class HelloController {
         String password = createPassword(POSSIBILITIES.valueOf(passwordBuildup.getValue()), passwordLength.getValue(), specials.getValue());
         // show password
         gpTextFlow.getChildren().clear(); // delete previous password
+        gpTextFlow.getChildren().add(new Text(" ".repeat(50))); // delete screen artifacts
+        gpTextFlow.getChildren().clear();
         convertToColors(gpTextFlow, password);
         // copy password to clipboard
         final Clipboard clipboard = Clipboard.getSystemClipboard();
@@ -110,7 +113,7 @@ public class HelloController {
             // mix in the special characters if needed
             if (pos.equals(POSSIBILITIES.LETTERS_DIGITS_SPECIALS)) {
                 for (int counter = 0; counter < maxSpecials; counter++) {
-                    password.setCharAt(sr.nextInt(length), BUILDUP.SPECIAL.content.charAt(sr.nextInt(BUILDUP.SPECIAL.content.length() - 1)));
+                    password.setCharAt(sr.nextInt(length), BUILDUP.SPECIAL.content.charAt(sr.nextInt(BUILDUP.SPECIAL.content.length())));
                 }
             }
             generatedPassword = password.toString();
@@ -128,8 +131,9 @@ public class HelloController {
         // digits in RED
         // specials in BLUE
         for (int counter = 0; counter < text.length(); counter++) {
-            Text txt = new Text(String.valueOf(text.charAt(counter)));
-            txt.setFont(Font.font("Monospace", 13));
+            Text txt = new Text();
+            txt.setFont(Font.font("Monospace", FontPosture.REGULAR,13));
+            txt.setText(String.valueOf(text.charAt(counter)));
             if (Character.isDigit(text.charAt(counter))) {
                 txt.setFill(Color.RED);
             } else if (Character.isLetter(text.charAt(counter))) {
@@ -139,6 +143,7 @@ public class HelloController {
             }
             txtFlow.getChildren().add(txt);
         }
+        txtFlow.getChildren().add(new Text(" "));  // resolve GUI issues of ghost characters on screen when using short passwords
     }
 
 }
